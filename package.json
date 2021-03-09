@@ -13,6 +13,7 @@
     "antlr": "sh scripts/antlr.sh",
     "build": "rollup -c rollup.config.js",
     "generate-types": "tsc",
+    "compile": "npx antlr4ts -visitor antlr/Solidity.g4 -o src/lib",
     "prettier": "prettier --write 'src/**/*' 'test/**/*'",
     "prepack": "npm run build && npm run generate-types",
     "eslint": "eslint src",
@@ -66,5 +67,9 @@
     "include": [
       "src/*.js"
     ]
+  },
+  "dependencies": {
+    "antlr4ts": "^0.5.0-alpha.4",
+    "antlr4ts-cli": "^0.5.0-alpha.4"
   }
 }
