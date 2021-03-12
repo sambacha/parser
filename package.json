@@ -18,7 +18,7 @@
     "prepack": "npm run build && npm run generate-types",
     "eslint": "eslint src",
     "lint": "eslint src",
-    "test": "npm run build && nyc mocha"
+    "test": "npx nyc mocha"
   },
   "authors": [
     "Franco Victorio",
