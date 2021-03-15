@@ -23,6 +23,7 @@ jobs:
       - name: npm install, build, and test
         run: |
           npm install
+          npm run-script antlr
           npm run-script compile
           npm run test
         env:
