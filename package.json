@@ -1,7 +1,7 @@
 {
-  "name": "@solidity-parser/parser",
-  "version": "0.12.0",
-  "description": "A Solidity parser built from a robust ANTLR 4 grammar",
+  "name": "solidity-parser-typescript",
+  "version": "0.12.0+ts",
+  "description": "TESTING - A Solidity parser built from a robust ANTLR 4 grammar",
   "main": "dist/index.cjs.js",
   "browser": "dist/index.iife.js",
   "files": [
@@ -12,12 +12,13 @@
   "scripts": {
     "antlr": "sh scripts/antlr.sh",
     "build": "rollup -c rollup.config.js",
-    "generate-types": "tsc",
+    "generate-types": "npx tsc",
+    "compile": "npx antlr4ts -visitor antlr/Solidity.g4 -o src/lib",
     "prettier": "prettier --write 'src/**/*' 'test/**/*'",
-    "prepack": "npm run build && npm run generate-types",
+    "prepack": "npm run generate-types",
     "eslint": "eslint src",
     "lint": "eslint src",
-    "test": "npm run build && nyc mocha"
+    "test": "npx nyc mocha"
   },
   "authors": [
     "Franco Victorio",
@@ -66,5 +67,9 @@
     "include": [
       "src/*.js"
     ]
+  },
+  "dependencies": {
+    "antlr4ts": "^0.5.0-alpha.4",
+    "antlr4ts-cli": "^0.5.0-alpha.4"
   }
 }
