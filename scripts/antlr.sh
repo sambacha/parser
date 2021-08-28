@@ -5,7 +5,7 @@ set -o errexit
 ANTLR_JAR="antlr/antlr4.jar"
 
 if [ ! -e "$ANTLR_JAR" ]; then
-  curl https://www.antlr.org/download/antlr-4.7.2-complete.jar -o "$ANTLR_JAR"
+  curl https://www.antlr.org/download/antlr-4.9.2-complete.jar -o "$ANTLR_JAR"
 fi
 
 java -jar $ANTLR_JAR -Dlanguage=JavaScript antlr/Solidity.g4 -o lib
