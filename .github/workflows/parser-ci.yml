@@ -1,0 +1,51 @@
+# CI for command line NodeJS Applications
+name: parser-ci
+on: ['push']
+
+env:
+  CI: true
+  FORCE_COLOR: 2
+
+jobs:
+  run:
+    name: Node ${{ matrix.node }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['10.x', '12.x', '14.x']
+        os: ['ubuntu-latest']
+
+    steps:
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@latest
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install Dependencies
+        run: yarn install
+        
+      - name: Run Antlr4
+        run: yarn run antrl4
+        
+      - name: Run Build
+        run: yarn run build
+        
+      - name: Run tests
+        run: yarn run test
+        
+      - name: Run tests
+        run: yarn run antlr
